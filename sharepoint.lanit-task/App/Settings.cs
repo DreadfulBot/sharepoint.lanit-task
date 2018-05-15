@@ -16,5 +16,11 @@ namespace sharepoint.lanit_task.App
 
         private static string _ListEditorsGroupName = "Редакторы статистики";
         public static string ListEditorsGroupName { get { return _ListEditorsGroupName; } set { } }
+
+        public static string[] _ListField = { "Значение", "Дата", "Пользователь" };
+
+        public static string ValueFieldName { get { return _ListField[0]; } set { } }
+        public static string DateFieldName { get { return _ListField[1]; } set { } }
+        public static string UserFieldName { get { return _ListField[2]; } set { } }
     }
 }

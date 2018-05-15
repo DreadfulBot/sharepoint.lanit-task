@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="sharepoint.lanit_task.Webparts.StatisticsDetails.StatisticsDetails, $SharePoint.Project.AssemblyFullName$" />
+      <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">sharepoint.lanit-task - StatisticsDetails</property>
+        <property name="Description" type="string">sharepoint.lanit-task - StatisticsDetails</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>

@@ -16,11 +16,11 @@ namespace sharepoint.lanit_task.Features.Feature1
     [Guid("015576ea-5116-46a6-aae8-ff01a2656eae")]
     public class Feature1EventReceiver : SPFeatureReceiver
     {
-        private RoleAssignmentWorker _groupWorker;
+        private RoleWorker _roleWorker;
         private ListWorker _listWorker;
         public Feature1EventReceiver()
         {
-            _groupWorker = new RoleAssignmentWorker();
+            _roleWorker = new RoleWorker();
             _listWorker = new ListWorker();
         }
 
@@ -47,13 +47,14 @@ namespace sharepoint.lanit_task.Features.Feature1
                     list.RestrictUserUpdates = true;
 
                     // remove all roles from list
-                    _listWorker.RemoveAllGroups(web, list);
+                    _listWorker.ClearListGroups(web, list);
 
-                    // adding custom group as list administator
-                    SPRoleAssignment roleAssignment = _groupWorker.FindRoleAssignment(web, Settings.ListEditorsGroupName);
+                    // creating group, containit administators
+                    // for created list
+                    SPRoleAssignment roleAssignment = _roleWorker.FindRoleAssignment(web, Settings.ListEditorsGroupName);
                     if(roleAssignment == null)
                     {
-                        roleAssignment = _groupWorker.CreateRoleAssignment(web, Settings.ListEditorsGroupName);
+                        roleAssignment = _roleWorker.CreateRoleAssignment(web, Settings.ListEditorsGroupName);
                     }
 
                     list.RoleAssignments.Add(roleAssignment);

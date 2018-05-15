@@ -9,7 +9,7 @@ namespace sharepoint.lanit_task.App
 {
     class ListWorker
     {
-        public void RemoveAllGroups(SPWeb web, SPList list)
+        public void ClearListGroups(SPWeb web, SPList list)
         {
             list.BreakRoleInheritance(true);
 
@@ -22,5 +22,9 @@ namespace sharepoint.lanit_task.App
             }
         }
 
+        public string GetInternalFieldName(SPWeb web, Guid listId, string field)
+        {
+            return web.Lists[listId].Fields[field].InternalName;
+        }
     }
 }

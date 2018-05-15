@@ -4,12 +4,12 @@
     <ContentTypes>
       
       
-    <ContentType ID="0x01003435d00e202c4a3da647e7ce324eda4a" Name="ListFieldsContentType"><FieldRefs><FieldRef ID="{e425e2ec-2915-49df-ad0d-6447381313da}" Name="sValue" /><FieldRef ID="{de1245f2-b369-45ba-9b42-a34e20478734}" Name="sDate" /><FieldRef ID="{6cd97761-098e-4f8f-b012-bb4dff8e2232}" Name="sUser" /></FieldRefs></ContentType><ContentTypeRef ID="0x01">
+    <ContentType ID="0x01003435d00e202c4a3da647e7ce324eda4a" Name="ListFieldsContentType"><FieldRefs><FieldRef ID="{e425e2ec-2915-49df-ad0d-6447381313da}" Name="sValue" /><FieldRef ID="{de1245f2-b369-45ba-9b42-a34e20478734}" Name="sDate" /><FieldRef ID="{65942de7-ec1a-4570-b2ff-995ba42a3f64}" Name="sUser" /></FieldRefs></ContentType><ContentTypeRef ID="0x01">
         <Folder TargetName="Item" />
       </ContentTypeRef><ContentTypeRef ID="0x0120" /></ContentTypes>
     <Fields>
       
-    <Field Name="sValue" ReadOnly="TRUE" ID="{e425e2ec-2915-49df-ad0d-6447381313da}" DisplayName="Значение" Type="Number" Required="TRUE" /><Field Name="sDate" ReadOnly="TRUE" ID="{de1245f2-b369-45ba-9b42-a34e20478734}" DisplayName="Дата" Type="DateTime" Required="TRUE" /><Field Name="sUser" ReadOnly="TRUE" ID="{6cd97761-098e-4f8f-b012-bb4dff8e2232}" DisplayName="Пользователь" Type="User" Required="TRUE" List="UserInfo" /></Fields>
+    <Field ReadOnly="TRUE" Name="sValue" ID="{e425e2ec-2915-49df-ad0d-6447381313da}" DisplayName="Значение" Type="Number" Required="TRUE" /><Field Name="sDate" ReadOnly="TRUE" ID="{de1245f2-b369-45ba-9b42-a34e20478734}" DisplayName="Дата" Type="DateTime" /><Field Name="sUser" ReadOnly="TRUE" ID="{65942de7-ec1a-4570-b2ff-995ba42a3f64}" DisplayName="Пользователь" Type="User" List="UserInfo" /></Fields>
     <Views>
       
       
@@ -37,7 +37,7 @@
         <RowLimit Paged="TRUE">30</RowLimit>
         <ViewFields>
           
-        <FieldRef Name="LinkTitle"></FieldRef><FieldRef Name="sValue" /><FieldRef Name="sDate" /><FieldRef Name="sUser" /></ViewFields>
+        <FieldRef Name="sValue" /><FieldRef Name="sDate" /><FieldRef Name="sUser" /></ViewFields>
         <Query>
           <OrderBy>
             
