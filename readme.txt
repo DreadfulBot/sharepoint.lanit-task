@@ -1,0 +1,2 @@
+http://devsharepoint/_layouts/15/sharepoint.lanit-task/StatisticsServices.asmx
+https://social.technet.microsoft.com/wiki/contents/articles/24194.sharepoint-2013-create-a-custom-wcf-rest-service-hosted-in-sharepoint-and-deployed-in-a-wsp.aspx

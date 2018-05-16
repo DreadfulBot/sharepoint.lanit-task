@@ -15,6 +15,7 @@
     <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SandboxedSolution>False</SandboxedSolution>
     <ActiveDeploymentConfiguration>Default</ActiveDeploymentConfiguration>
+    <TokenReplacementFileExtensions>svc</TokenReplacementFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,8 +47,13 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
@@ -55,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\IStatisticsValues.cs" />
+    <Compile Include="App\Models\StatisticsItem.cs" />
     <Compile Include="App\RoleWorker.cs" />
     <Compile Include="App\ListWorker.cs" />
     <Compile Include="App\Logger.cs" />
@@ -63,6 +70,8 @@
     <Compile Include="Features\Feature1\Feature1.EventReceiver.cs">
       <DependentUpon>Feature1.feature</DependentUpon>
     </Compile>
+    <Compile Include="ISAPI\StatisticsServices.svc.cs" />
+    <Compile Include="ISAPI\IStatisticsServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site Columns\StatisticsEvents\StatisticsEvents.cs" />
     <Compile Include="Webparts\StatisticsDetails\StatisticsDetails.cs" />
@@ -81,6 +90,9 @@
     <None Include="Features\Feature1\Feature1.feature">
       <FeatureId>{4a7398e5-66fd-4494-9f91-b82ce08de9ff}</FeatureId>
     </None>
+    <None Include="ISAPI\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{1ce14506-2d8b-4558-b081-dede01ac637c}</SharePointProjectItemId>
+    </None>
     <None Include="key.snk" />
     <None Include="Package\Package.package">
       <PackageId>{82de7872-e1bf-4c52-8469-7727701846d8}</PackageId>
@@ -88,6 +100,7 @@
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </None>
+    <None Include="README.MD" />
     <None Include="Site Columns\Statistics\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{00c56918-746d-4ca8-9898-584a23ffeda6}</SharePointProjectItemId>
     </None>
@@ -114,6 +127,7 @@
     <Content Include="Features\Feature1\Feature1.Template.xml">
       <DependentUpon>Feature1.feature</DependentUpon>
     </Content>
+    <Content Include="ISAPI\StatisticsServices.svc" />
     <Content Include="Site Columns\Statistics\Elements.xml" />
     <Content Include="Site Columns\Statistics\Schema.xml" />
     <Content Include="Site Columns\Statistics\StatisticsInstance\Elements.xml" />
