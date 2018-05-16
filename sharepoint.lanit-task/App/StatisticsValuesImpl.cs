@@ -29,7 +29,7 @@ namespace sharepoint.lanit_task.App
 
         public string getValue(SPWeb web, SPItemEventProperties props)
         {
-            string valueInternalName = _listWorker.GetInternalFieldName(web, props.ListId, Settings.ValueFieldName);
+            string valueInternalName = _listWorker.GetFieldInternalName(web, props.ListId, Settings.ValueFieldName);
 
             int oldValue = int.Parse(props.AfterProperties[valueInternalName].ToString());
             return (oldValue + 1).ToString();

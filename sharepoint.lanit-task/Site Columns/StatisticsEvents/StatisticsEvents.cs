@@ -31,12 +31,12 @@ namespace sharepoint.lanit_task.StatisticsEvents
                 {
                     using (SPWeb web = properties.OpenWeb())
                     {
-                        string valueInternalName = _listWorker.GetInternalFieldName(web, properties.ListId, Settings.ValueFieldName);
-                        string dateInternalName = _listWorker.GetInternalFieldName(web, properties.ListId, Settings.DateFieldName);
-                        string userInternalName = _listWorker.GetInternalFieldName(web, properties.ListId, Settings.UserFieldName);
+                        string valueInternalName = _listWorker.GetFieldInternalName(web, properties.ListId, Settings.ValueFieldName);
+                        string dateInternalName = _listWorker.GetFieldInternalName(web, properties.ListId, Settings.DateFieldName);
+                        string userInternalName = _listWorker.GetFieldInternalName(web, properties.ListId, Settings.UserFieldName);
 
                         properties.AfterProperties[valueInternalName] = _statisticValues.getValue(web, properties);
-                        properties.AfterProperties[dateInternalName] = _statisticValues.getDate(web, properties);
+                        //properties.AfterProperties[dateInternalName] = _statisticValues.getDate(web, properties);
                         properties.AfterProperties[userInternalName] = _statisticValues.getUser(web, properties);
 
                         base.ItemAdding(properties);

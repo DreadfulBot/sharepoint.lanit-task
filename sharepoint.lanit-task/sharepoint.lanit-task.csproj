@@ -100,13 +100,17 @@
     <None Include="Webparts\StatisticsDetails\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{acba3605-46d3-4cc2-a3df-768bab29845d}</SharePointProjectItemId>
     </None>
-    <None Include="Webparts\StatisticsDetails\StatisticsDetails.webpart" />
+    <None Include="Webparts\StatisticsDetails\StatisticsDetails.webpart">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Content Include="Bootstrap\bootstrap.min.css" />
     <Content Include="Bootstrap\bootstrap.min.js" />
-    <Content Include="Bootstrap\Elements.xml" />
+    <Content Include="Bootstrap\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Features\Feature1\Feature1.Template.xml">
       <DependentUpon>Feature1.feature</DependentUpon>
     </Content>
@@ -114,7 +118,9 @@
     <Content Include="Site Columns\Statistics\Schema.xml" />
     <Content Include="Site Columns\Statistics\StatisticsInstance\Elements.xml" />
     <Content Include="Site Columns\StatisticsEvents\Elements.xml" />
-    <Content Include="Webparts\StatisticsDetails\Elements.xml" />
+    <Content Include="Webparts\StatisticsDetails\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Webparts\StatisticsDetails\StatisticsDetailsUserControl.ascx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

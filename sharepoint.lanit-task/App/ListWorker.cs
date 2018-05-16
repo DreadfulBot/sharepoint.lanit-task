@@ -22,7 +22,7 @@ namespace sharepoint.lanit_task.App
             }
         }
 
-        public string GetInternalFieldName(SPWeb web, Guid listId, string field)
+        public string GetFieldInternalName(SPWeb web, Guid listId, string field)
         {
             return web.Lists[listId].Fields[field].InternalName;
         }

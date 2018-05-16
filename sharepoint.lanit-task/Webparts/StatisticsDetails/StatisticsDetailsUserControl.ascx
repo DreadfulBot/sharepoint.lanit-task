@@ -10,19 +10,90 @@
 <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-<div class="container">
-    <h3>Создание нового элемента статистики</h3>
-    <form class="alert-info">
-        <div class="form-group">
-            <label for="number">Укажите число:</label>
-            <input id="number" type="number" class="form-control" min="0" />
-        </div>
+<style>
+    .btn-primary {
+        margin-left: 0px !important;
+    }
 
-        <div class="form-group">
-            <label for="date">Укажите дату:</label>
-            <SharePoint:DateTimeControl ID="date" runat="server" CssClassTextBox="form-control" />
+    #statistic-details {
+        padding: 20px;
+        border-radius: 15px;
+    }
+</style>
+
+<script type="text/javascript">
+    function showReponse() {
+        let form = document.querySelector('#statistic-details');
+        if (!form) return;
+
+        let responsePlaceholder = form.querySelector('#response');
+        if (!responsePlaceholder) return;
+
+        if (isSuccessed) {
+            responsePlaceholder.classList.add('alert-success');
+        } else {
+            responsePlaceholder.classList.add('alert-danger');
+        }
+
+        let node = document.createTextNode(message);
+        responsePlaceholder.appendChild(node);
+        return;
+    }
+
+    document.addEventListener('DOMContentLoaded', showReponse, false);
+</script>
+
+<div class="container alert-dark" id="statistic-details">
+
+
+<h3>Создание нового элемента статистики</h3>
+    <div class="form-group">
+        <div class="form-row">
+            <label for="number">Укажите число:</label>
+            <asp:TextBox ID="txtNumber" runat="server" CssClass="form-control"></asp:TextBox>
         </div>
-    </form>
+        <div class="form-row">
+            <asp:CompareValidator ID="numberCompareValidator" runat="server" ControlToValidate="txtNumber" Type="Integer" Operator="DataTypeCheck" ErrorMessage="Указано неверное число" CssClass="invalid-feedback" Display="Dynamic" ></asp:CompareValidator>
+            <asp:RequiredFieldValidator ID="numberRequireValidator" runat="server" ControlToValidate="txtNumber" ErrorMessage="Укажите число" CssClass="invalid-feedback" Display="Dynamic"></asp:RequiredFieldValidator>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-row">
+            <label for="date">Укажите дату:</label>
+        </div>
+        <div class="form-row">
+            <SharePoint:DateTimeControl ID="dtcDate" runat="server" CssClassTextBox="form-control" CssClassDescription="form-control" />
+        </div>
+        <div class="form-row">
+            <asp:CompareValidator ID="dateCompareValidator" runat="server" ControlToValidate="dtcDate$dtcDateDate" Type="Date" Operator="DataTypeCheck"  ErrorMessage="Указана неверная дата" CssClass="invalid-feedback" Display="Dynamic"></asp:CompareValidator>
+            <asp:RequiredFieldValidator ID="dateRequireValidator" runat="server" ControlToValidate="dtcDate$dtcDateDate" ErrorMessage="Укажите дату" CssClass="invalid-feedback" Display="Dynamic"></asp:RequiredFieldValidator>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-row">
+            <% if (Request.QueryString["success"] == "1")
+                { %>
+
+            <div class="alert alert-success">
+
+            <% }
+    else
+    { %>
+            <div class="alert alert-error">
+
+            <% } %>
+
+                 <%= Request.QueryString["message"] %>
+               
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <asp:Button ID="btnSave" CssClass="btn btn-primary"  runat="server" Text="Сохранить" OnClick="btnSave_Click" />
+    </div>
 </div>
 
 
