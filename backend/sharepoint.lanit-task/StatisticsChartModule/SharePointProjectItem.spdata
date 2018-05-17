@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="StatisticsChartModule\" Type="ElementManifest" />
+    <ProjectItemFile Source="Sample.txt" Target="StatisticsChartModule\" Type="ElementFile" />
+    <ProjectItemFile Source="css\app.42817a0e.css" Target="StatisticsChartModule\css\" Type="ElementFile" />
+    <ProjectItemFile Source="css\vendorsapp.0.73f9550a.css" Target="StatisticsChartModule\css\" Type="ElementFile" />
+    <ProjectItemFile Source="js\app.ff001913.js" Target="StatisticsChartModule\js\" Type="ElementFile" />
+    <ProjectItemFile Source="js\app.ff001913.js.map" Target="StatisticsChartModule\js\" Type="ElementFile" />
+    <ProjectItemFile Source="js\vendorsapp.a4dbcf2d.js" Target="StatisticsChartModule\js\" Type="ElementFile" />
+    <ProjectItemFile Source="js\vendorsapp.a4dbcf2d.js.map" Target="StatisticsChartModule\js\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

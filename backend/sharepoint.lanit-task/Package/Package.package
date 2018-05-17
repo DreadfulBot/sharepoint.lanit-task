@@ -2,5 +2,9 @@
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="82de7872-e1bf-4c52-8469-7727701846d8" solutionId="82de7872-e1bf-4c52-8469-7727701846d8" resetWebServer="false" sharePointProductVersion="15.0" name="sharepoint.lanit_task" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <features>
     <featureReference itemId="4a7398e5-66fd-4494-9f91-b82ce08de9ff" />
+    <featureReference itemId="dca895d2-6674-4c87-912f-87f63e3ad269" />
   </features>
+  <projectItems>
+    <projectItemReference itemId="1ce14506-2d8b-4558-b081-dede01ac637c" />
+  </projectItems>
 </package>
