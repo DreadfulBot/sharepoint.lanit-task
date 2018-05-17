@@ -100,9 +100,12 @@
     <None Include="Features\Feature1\Feature1.feature">
       <FeatureId>{4a7398e5-66fd-4494-9f91-b82ce08de9ff}</FeatureId>
     </None>
+<<<<<<< HEAD:backend/sharepoint.lanit-task/sharepoint.lanit-task.csproj
     <None Include="Features\Feature2\Feature2.feature">
       <FeatureId>{dca895d2-6674-4c87-912f-87f63e3ad269}</FeatureId>
     </None>
+=======
+>>>>>>> 9f618d8f965b5c422b212c66aa44cf72c4eea7fb:sharepoint.lanit-task/sharepoint.lanit-task.csproj
     <None Include="ISAPI\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{1ce14506-2d8b-4558-b081-dede01ac637c}</SharePointProjectItemId>
     </None>
@@ -149,9 +152,12 @@
     <Content Include="Features\Feature1\Feature1.Template.xml">
       <DependentUpon>Feature1.feature</DependentUpon>
     </Content>
+<<<<<<< HEAD:backend/sharepoint.lanit-task/sharepoint.lanit-task.csproj
     <Content Include="Features\Feature2\Feature2.Template.xml">
       <DependentUpon>Feature2.feature</DependentUpon>
     </Content>
+=======
+>>>>>>> 9f618d8f965b5c422b212c66aa44cf72c4eea7fb:sharepoint.lanit-task/sharepoint.lanit-task.csproj
     <Content Include="ISAPI\StatisticsServices.svc" />
     <Content Include="Site Columns\Statistics\Elements.xml" />
     <Content Include="Site Columns\Statistics\Schema.xml" />
