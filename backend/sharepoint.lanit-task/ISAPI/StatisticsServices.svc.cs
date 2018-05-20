@@ -66,7 +66,10 @@ namespace sharepoint.lanit_task.Services
                             "<Where><Eq>",
                                 "<FieldRef Name='" + internalUserField + "' LookupId='True'/>",
                                 "<Value Type='User'>" + userId + "</Value>",
-                            "</Eq></Where>"
+                            "</Eq></Where>",
+                            "<OrderBy>",
+                                "<FieldRef Name='" + internalDateField + "' Ascending='True' />",
+                            "</OrderBy>"
                             );
 
                         SPListItemCollection items = list.GetItems(query);

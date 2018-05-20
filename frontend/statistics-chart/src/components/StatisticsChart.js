@@ -28,7 +28,6 @@ export default {
 		} else {
 			this.loadStatistics()
 				.then(() => {
-					debugger;
 					this.renderChart({
 						labels: this.labels,
 						datasets: [
@@ -45,12 +44,9 @@ export default {
 
 	},
 	methods: {
-
 		async loadStatistics () {
 			await axios.get(this.backendUrl + this.userId)
 			.then((response) => {
-				debugger;
-
 				this.datasets.data = response.data.map((x) => {
 					return x.Value;
 				});
@@ -58,10 +54,6 @@ export default {
 				this.labels = response.data.map((x) => {
 					return x.Date;
 				});
-
-
-
-				console.log(this.dataset);
 			}).catch((response) => {
 				console.log(response);
 			});

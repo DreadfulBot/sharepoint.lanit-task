@@ -11,119 +11,135 @@ root = ''
 
 
 def copytree(src, dst, symlinks=False, ignore=None):
-    for item in os.listdir(src):
-        s = os.path.join(src, item)
-        d = os.path.join(dst, item)
+	for item in os.listdir(src):
+		s = os.path.join(src, item)
+		d = os.path.join(dst, item)
 
-        if(os.path.exists(d)):
-            if(os.path.isdir(d)):
-                shutil.rmtree(d)
-            else:
-                os.remove(d)
-        if os.path.isdir(s):
-            shutil.copytree(s, d, symlinks, ignore)
-        else:
-            shutil.copy2(s, d)
+		if(os.path.exists(d)):
+			if(os.path.isdir(d)):
+				shutil.rmtree(d)
+			else:
+				os.remove(d)
+		if os.path.isdir(s):
+			shutil.copytree(s, d, symlinks, ignore)
+		else:
+			shutil.copy2(s, d)
 
 
 def loadXmlFile(filename, level, decl):
-    ET.register_namespace('', decl)
-    global tree
-    tree = ET.parse(filename)
-    global root
-    root = tree.getroot()
-
-    for f in root[level]:
-        root[level].remove(f)
-
-    saveXml(filename)
-
+	ET.register_namespace('', decl)
+	global tree
+	tree = ET.parse(filename)
+	global root
+	root = tree.getroot()
 
 def saveXml(filename):
-    tree.write(filename, encoding="utf-8", default_namespace=None, xml_declaration=True)
+	tree.write(filename, encoding="utf-8", default_namespace=None, xml_declaration=True)
 
+def addEntryToElementsXml(document, level, uriPath, filename):
+	el = ET.Element('File')
+	el.set('Path', 'StatisticsChartModule\\' + uriPath.split('/')[1] + '\\' + filename)
+	splittedFName = filename.split('.')
 
-def addElementsXmlEntry(document, level, uriPath, filename):
-    el = ET.Element('File')
-    el.set('Path', 'StatisticsChartModule\\' + uriPath.split('/')[1] + '\\' + filename)
-    splittedFName = filename.split('.')
+	el.set('Url', 'StatisticsChartModule/' + uriPath.split('/')[1] + '/' + splittedFName[0] + '.' + splittedFName[-1])
+	root[level].append(el)
 
-    el.set('Url', 'StatisticsChartModule/' + uriPath.split('/')[1] + '/' + splittedFName[0] + '.' + splittedFName[-1])
-    root[level].append(el)
+def addEntryToSpDataXml(document, level, uriPath, filename, type):
+	el = ET.Element('ProjectItemFile')
+	source = ''
+	target = ''
 
-def addSpDataXmlEntry(document, level, uriPath, filename, type):
-    el = ET.Element('ProjectItemFile')
-    source = ''
-    target = ''
+	if(uriPath.split('/')[1] == ''):
+		source = filename
+		target = 'StatisticsChartModule\\'
 
-    if(uriPath.split('/')[1] == ''):
-        source = filename
-        target = 'StatisticsChartModule\\'
+	else:
+		source = uriPath.split('/')[1] + '\\' + filename
+		target = 'StatisticsChartModule\\' + uriPath.split('/')[1] + '\\'
 
-    else:
-        source = uriPath.split('/')[1] + '\\' + filename
-        target = 'StatisticsChartModule\\' + uriPath.split('/')[1] + '\\'
+	el.set('Source', source)
+	el.set('Target', target)
+	el.set('Type', type)
+	root[level].append(el)
 
+def generateElementsXml(path):
+	for filename in os.listdir(path):
+		s = os.path.join(path, filename)
 
-    el.set('Source', source)
-    el.set('Target', target)
-    el.set('Type', type)
-    root[level].append(el)
+		if os.path.isdir(s):
+			generateElementsXml(s)
 
+		else:
+			addEntryToElementsXml(tree, 0, path, filename)
 
-def updateElementsXml(path):
-    for item in os.listdir(path):
-        s = os.path.join(path, item)
-        if os.path.isdir(s):
-            updateElementsXml(s)
-        else:
-            addElementsXmlEntry(tree, 0, path, item)
+def generateSpDataXml(path, ignoreFiles):	
+	for filename in os.listdir(path):
+		s = os.path.join(path, filename)
+		
+		if os.path.isdir(s):
+			generateSpDataXml(s, ignoreFiles)
 
-def updateSpDataXml(path):
-    for item in os.listdir(path):
-        s = os.path.join(path, item)
-        if os.path.isdir(s):
-            updateSpDataXml(s)
-        else:
-            addSpDataXmlEntry(tree, 0, path, item, 'ElementFile')
+		else:
+			if filename in ignoreFiles:
+				print("ignoring " + filename)
+				continue
 
-def preprocessFiles(path):
-    unusedFiles = ['index.html', 'favicon.ico']
-    for filename in glob.iglob(path + '/**'):
-        for uf in unusedFiles:
-            if uf in filename:
-                print("file " + uf + " removed")
-                os.remove(filename)
-                continue
+			addEntryToSpDataXml(tree, 0, path, filename, 'ElementFile')
+		
 
-        s = filename
-        if (os.path.isdir(s)):
-            preprocessFiles(s)
-        else:
-            if '~' in s:
-                os.rename(s, s.replace('~', ''))
-                print("renaming file " + str(filename))
+def removeFiles(path, filesToRemove):
+	for filename in glob.iglob(path + '/**'):
+		
+		if os.path.isdir(filename):
+			removeFiles(filename, filesToRemove)
+		else:
+			for f in filesToRemove:
+				if f in filename:
+					print("file " + f + " removed")
+					os.remove(filename)
+					continue
+
+def renameFiles(path, replacements):
+	for filename in glob.iglob(path + '/**'):
+		s = filename
+		
+		if os.path.isdir(s):
+			renameFiles(s, replacements)
+
+		else:
+			for replacement in replacements:
+				if replacement[0] in s:
+					os.rename(s, s.replace(replacement[0], replacement[1]))
+					print("renaming file " + str(filename))
 
 
 try:
-    preprocessFiles('dist/')
+	# renaming for VS, for to be able correctly
+	# include files into project and import them in
+	# .ascx page
+	removeFiles('dist/', ['index.html', 'favicon.ico'])
+	renameFiles('dist/', [['~', '']])
 
-    loadXmlFile(
-        os.path.join(MODULES_REL_PATH, 'Elements.xml'),
-        0,
-        'http://schemas.microsoft.com/sharepoint/')
+	# updating and saving Elements.xml
+	loadXmlFile(
+		os.path.join('src/templates/', 'Elements.xml'),
+		0,
+		'http://schemas.microsoft.com/sharepoint/')
 
-    updateElementsXml('dist/')
-    saveXml(os.path.join('module/', 'Elements.xml'))
+	generateElementsXml('dist/')
+	saveXml(os.path.join('dist/', 'Elements.xml'))
 
-    loadXmlFile(
-        os.path.join(MODULES_REL_PATH, 'SharePointProjectItem.spdata'),
-        0,
-        'http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel')
+	# updating and saving SharepointProjectItem.spdata
+	loadXmlFile(
+		os.path.join('src/templates/', 'SharePointProjectItem.spdata'),
+		0,
+		'http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel')
 
-    updateSpDataXml('dist/')
-    addSpDataXmlEntry(tree, 0, '/', 'Elements.xml', 'ElementManifest')
+	addEntryToSpDataXml(tree, 0, '/', 'Elements.xml', 'ElementManifest')
 
-    saveXml(os.path.join('module/', 'SharePointProjectItem2.spdata'))
+	generateSpDataXml('dist/', ['Elements.xml'])
+	
+	saveXml(os.path.join('dist/', 'SharePointProjectItem.spdata'))
+
 except Exception as e:
-    print('Error' + str(e))
+	print('Error' + str(e))

@@ -49,8 +49,8 @@ namespace sharepoint.lanit_task.Features.Feature1
                     // remove all roles from list
                     _listWorker.ClearListGroups(web, list);
 
-                    // creating group, containit administators
-                    // for created list
+                    // creating group, containig administators
+                    // for new list
                     SPRoleAssignment roleAssignment = _roleWorker.FindRoleAssignment(web, Settings.ListEditorsGroupName);
                     if(roleAssignment == null)
                     {
