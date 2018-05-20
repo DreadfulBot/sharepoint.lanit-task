@@ -24,7 +24,7 @@ __IDE used for development:__
 * Backend – VisualStudio 2015 v14.0.23
 * Frontend – PhpStorm 2017.1.4
 
-All Settings data stores in _“App/Settings.cs”_
+All Settings data stores in [sharepoint.lanit-task/backend/sharepoint.lanit-task/App/Settings.cs] _“App/Settings.cs”_
 
 All Classes, Workers and Models stores in _“App”_
 
