@@ -60,7 +60,7 @@ namespace sharepoint.lanit_task.Features.Feature1
                     list.RoleAssignments.Add(roleAssignment);
 
                     Logger.LogMessage(
-                        string.Format("New role {0} were added and assigned to list {1}", 
+                        string.Format("New role {0} was added and assigned to list {1}", 
                         Settings.ListEditorsGroupName,
                         Settings.ListName
                         ));
