@@ -1,5 +1,5 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-  <Module Name="StatisticsChartModule">
-    <File Path="StatisticsChartModule\css\app.42817a0e.css" Url="StatisticsChartModule/css/app.css" /><File Path="StatisticsChartModule\css\vendorsapp.0.73f9550a.css" Url="StatisticsChartModule/css/vendorsapp.css" /><File Path="StatisticsChartModule\js\app.ff001913.js" Url="StatisticsChartModule/js/app.js" /><File Path="StatisticsChartModule\js\app.ff001913.js.map" Url="StatisticsChartModule/js/app.map" /><File Path="StatisticsChartModule\js\vendorsapp.a4dbcf2d.js" Url="StatisticsChartModule/js/vendorsapp.js" /><File Path="StatisticsChartModule\js\vendorsapp.a4dbcf2d.js.map" Url="StatisticsChartModule/js/vendorsapp.map" /></Module>
+    <Module Name="StatisticsChartModule">
+    <File Path="StatisticsChartModule\css\app.42817a0e.css" Url="StatisticsChartModule/css/app.css" /><File Path="StatisticsChartModule\css\vendorsapp.0.73f9550a.css" Url="StatisticsChartModule/css/vendorsapp.css" /><File Path="StatisticsChartModule\js\app.6b24cdd1.js" Url="StatisticsChartModule/js/app.js" /><File Path="StatisticsChartModule\js\app.6b24cdd1.js.map" Url="StatisticsChartModule/js/app.map" /><File Path="StatisticsChartModule\js\vendorsapp.a4dbcf2d.js" Url="StatisticsChartModule/js/vendorsapp.js" /><File Path="StatisticsChartModule\js\vendorsapp.a4dbcf2d.js.map" Url="StatisticsChartModule/js/vendorsapp.map" /></Module>
 </Elements>

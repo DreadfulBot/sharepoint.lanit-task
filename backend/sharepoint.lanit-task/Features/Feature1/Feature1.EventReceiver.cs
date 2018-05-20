@@ -49,8 +49,8 @@ namespace sharepoint.lanit_task.Features.Feature1
                     // remove all roles from list
                     _listWorker.ClearListGroups(web, list);
 
-                    // creating group, containit administators
-                    // for created list
+                    // creating group, containig administators
+                    // for new list
                     SPRoleAssignment roleAssignment = _roleWorker.FindRoleAssignment(web, Settings.ListEditorsGroupName);
                     if(roleAssignment == null)
                     {
@@ -60,7 +60,7 @@ namespace sharepoint.lanit_task.Features.Feature1
                     list.RoleAssignments.Add(roleAssignment);
 
                     Logger.LogMessage(
-                        string.Format("New role {0} were added and assigned to list {1}", 
+                        string.Format("New role {0} was added and assigned to list {1}", 
                         Settings.ListEditorsGroupName,
                         Settings.ListName
                         ));

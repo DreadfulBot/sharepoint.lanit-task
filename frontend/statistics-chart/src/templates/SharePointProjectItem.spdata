@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ProjectItem xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel" DefaultFile="Elements.xml" SupportedDeploymentScopes="Web, Site" SupportedTrustLevels="All" Type="Microsoft.VisualStudio.SharePoint.Module">
+  <Files>
+
+  </Files>
+</ProjectItem>

@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "f": "yarn build&&py -3 prepare-module.py"
+    "f": "yarn build&&py -3 prepare-module.py",
+    "m": "py -3 prepare-module.py"
   },
   "dependencies": {
     "axios": "^0.18.0",
