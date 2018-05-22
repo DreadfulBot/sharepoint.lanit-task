@@ -27,19 +27,24 @@ namespace sharepoint.lanit_task.StatisticsEvents
         {
             try
             {
+                SPUtility.ValidateFormDigest();
                 SPSecurity.RunWithElevatedPrivileges(delegate ()
                 {
-                    using (SPWeb web = properties.OpenWeb())
+                    using (SPSite site = new SPSite(Settings.SiteURL))
                     {
-                        string valueInternalName = _listWorker.GetFieldInternalName(web, properties.ListId, Settings.ValueFieldName);
-                        string dateInternalName = _listWorker.GetFieldInternalName(web, properties.ListId, Settings.DateFieldName);
-                        string userInternalName = _listWorker.GetFieldInternalName(web, properties.ListId, Settings.UserFieldName);
+                        using (SPWeb web = site.OpenWeb())
+                        {
+                            string valueInternalName =
+                                _listWorker.GetFieldInternalName(web, properties.ListId, Settings.ValueFieldName);
+                            string dateInternalName =
+                                _listWorker.GetFieldInternalName(web, properties.ListId, Settings.DateFieldName);
+                            string userInternalName =
+                                _listWorker.GetFieldInternalName(web, properties.ListId, Settings.UserFieldName);
 
-                        properties.AfterProperties[valueInternalName] = _statisticValues.getValue(web, properties);
-                        //properties.AfterProperties[dateInternalName] = _statisticValues.getDate(web, properties);
-                        properties.AfterProperties[userInternalName] = _statisticValues.getUser(web, properties);
+                            properties.AfterProperties[valueInternalName] = _statisticValues.getValue(web, properties);
 
-                        base.ItemAdding(properties);
+                            base.ItemAdding(properties);
+                        }
                     }
                 });
             } catch (Exception e)

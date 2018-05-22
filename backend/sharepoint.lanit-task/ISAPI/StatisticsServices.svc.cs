@@ -7,6 +7,7 @@ using System.ServiceModel.Activation;
 using sharepoint.lanit_task.App.Models;
 using sharepoint.lanit_task.App;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.Utilities;
 
 namespace sharepoint.lanit_task.Services
 {
@@ -34,7 +35,7 @@ namespace sharepoint.lanit_task.Services
 
                 using (SPWeb web = SPContext.Current.Web)
                 {
-                    result = GetUserStatistics(_statisticsValues.getUser(web, null));
+                    result = GetUserStatistics(_statisticsValues.getUser(web));
                 }
             } catch(Exception ex)
             {
@@ -50,38 +51,41 @@ namespace sharepoint.lanit_task.Services
             {
                 SPSecurity.RunWithElevatedPrivileges(delegate ()
                 {
-                    SPSite site = new SPSite(Settings.SiteURL);
-                    SPUserToken systoken = site.SystemAccount.UserToken;
-
-                    using (SPWeb web = site.OpenWeb())
+                    using (SPSite site = new SPSite(Settings.SiteURL))
                     {
-                        SPList list = web.Lists.TryGetList(Settings.ListName);
-
-                        string internalUserField = _listWorker.GetFieldInternalName(web, list.ID, Settings.UserFieldName);
-                        string internalDateField = _listWorker.GetFieldInternalName(web, list.ID, Settings.DateFieldName);
-                        string internalValueField = _listWorker.GetFieldInternalName(web, list.ID, Settings.ValueFieldName);
-
-                        SPQuery query = new SPQuery();
-                        query.Query = string.Concat(
-                            "<Where><Eq>",
-                                "<FieldRef Name='" + internalUserField + "' LookupId='True'/>",
-                                "<Value Type='User'>" + userId + "</Value>",
-                            "</Eq></Where>",
-                            "<OrderBy>",
-                                "<FieldRef Name='" + internalDateField + "' Ascending='True' />",
-                            "</OrderBy>"
-                            );
-
-                        SPListItemCollection items = list.GetItems(query);
-
-                        foreach (SPListItem e in items)
+                        using (SPWeb web = site.OpenWeb())
                         {
-                            result.Add(new StatisticsItem
+                            SPList list = web.GetList("/Lists/" + Settings.ListName);
+
+                            string internalUserField =
+                                _listWorker.GetFieldInternalName(web, list.ID, Settings.UserFieldName);
+                            string internalDateField =
+                                _listWorker.GetFieldInternalName(web, list.ID, Settings.DateFieldName);
+                            string internalValueField =
+                                _listWorker.GetFieldInternalName(web, list.ID, Settings.ValueFieldName);
+
+                            SPQuery query = new SPQuery();
+                            query.Query = string.Concat(
+                                "<Where><Eq>",
+                                    "<FieldRef Name='" + internalUserField + "' LookupId='True'/>",
+                                    "<Value Type='User'>" + userId + "</Value>",
+                                "</Eq></Where>",
+                                "<OrderBy>",
+                                    "<FieldRef Name='" + internalDateField + "' Ascending='True' />",
+                                "</OrderBy>"
+                                );
+
+                            SPListItemCollection items = list.GetItems(query);
+
+                            foreach (SPListItem e in items)
                             {
-                                Date = e[internalDateField].ToString(),
-                                User = e[internalUserField].ToString(),
-                                Value = e[internalValueField].ToString()
-                            });
+                                result.Add(new StatisticsItem
+                                {
+                                    Date = e[internalDateField].ToString(),
+                                    User = e[internalUserField].ToString(),
+                                    Value = e[internalValueField].ToString()
+                                });
+                            }
                         }
                     }
                 });

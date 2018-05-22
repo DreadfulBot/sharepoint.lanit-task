@@ -10,8 +10,8 @@ namespace sharepoint.lanit_task.App
     interface IStatisticsValues
     {
         string getValue(SPWeb web, SPItemEventProperties props);
-        string getUser(SPWeb web, SPItemEventProperties props);
-        string getDate(SPWeb web, SPItemEventProperties props);
+        string getUser(SPWeb web);
+        string getDate();
 
     }
 }

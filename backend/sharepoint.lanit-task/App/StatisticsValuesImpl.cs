@@ -16,12 +16,12 @@ namespace sharepoint.lanit_task.App
             _listWorker = new ListWorker();
         }
 
-        public string getDate(SPWeb web, SPItemEventProperties props)
+        public string getDate()
         {
             return DateTime.UtcNow.ToString("s") + "Z";
         }
 
-        public string getUser(SPWeb web, SPItemEventProperties props)
+        public string getUser(SPWeb web)
         {
             if (web.CurrentUser == null) throw new Exception("Undefined user");
             return "-1;#" + web.CurrentUser.LoginName;

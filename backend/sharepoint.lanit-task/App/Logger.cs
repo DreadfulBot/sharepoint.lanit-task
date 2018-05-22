@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.Utilities;
 using System.Diagnostics;
 
 namespace sharepoint.lanit_task.App
@@ -12,6 +13,7 @@ namespace sharepoint.lanit_task.App
     {
         public static void Log(string message, EventLogEntryType type)
         {
+            SPUtility.ValidateFormDigest();
             SPSecurity.RunWithElevatedPrivileges(delegate ()
             {
                 if (!EventLog.SourceExists("SharePoint Custom Solutions"))
